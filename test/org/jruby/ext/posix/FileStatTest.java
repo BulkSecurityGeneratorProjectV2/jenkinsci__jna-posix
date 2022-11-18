@@ -2,6 +2,8 @@
 package org.jruby.ext.posix;
 
 import java.io.File;
+import java.nio.file.Files;
+
 import org.jruby.ext.posix.util.Platform;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -40,7 +42,7 @@ public class FileStatTest {
     // @Test
     // public void hello() {}
     @Test public void filestat() throws Throwable {
-        File f = File.createTempFile("stat", null);
+        File f = Files.createTempFile("stat", null).toFile();
         FileStat st = posix.stat(f.getAbsolutePath());
         f.delete();
         assertNotNull("posix.stat failed", st);
